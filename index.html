@@ -121,6 +121,13 @@ p{margin:0}
 .strip .p{color:var(--sky)}
 .strip i{width:6px; height:6px; background:var(--line); display:inline-block}
 
+/* hero pixel field: cells light up under the cursor and fade, like pixels coming into focus */
+.hero{position:relative; overflow:hidden}
+.hero > .wrap{position:relative; z-index:1}
+.pixfield{position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:0}
+.hero .plate .cloud{transition:transform .25s ease-out; will-change:transform}
+@media (prefers-reduced-motion:reduce){ .pixfield{display:none} .hero .plate .cloud{transition:none} }
+
 /* pain points */
 .pains{list-style:none; margin:0; padding:0; border-bottom:1px solid var(--rule)}
 .pains li{display:grid; grid-template-columns:72px minmax(0,1fr) auto; gap:16px; align-items:baseline; padding:22px 12px; border-top:1px solid var(--rule)}
@@ -298,6 +305,7 @@ footer .wrap{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:24px 40
 
 <main id="main">
   <section class="hero" id="top">
+    <canvas class="pixfield" aria-hidden="true"></canvas>
     <div class="wrap">
       <div class="hero-top"><span class="live">SOCIAL MEDIA FOR HOSPITALITY</span><span>COLOMBO, SRI LANKA · SHOOTS ISLAND-WIDE</span></div>
       <div class="hero-grid">
@@ -603,6 +611,59 @@ document.getElementById('fc').addEventListener('submit', function (e) {
   document.getElementById('wa-send').href = 'https://wa.me/94774247868?text=' + encodeURIComponent(msg);
   document.getElementById('sent').hidden = false;
 });
+
+(function () {
+  var hero = document.querySelector('.hero');
+  var cv = hero && hero.querySelector('.pixfield');
+  if (!cv || !cv.getContext || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var ctx = cv.getContext('2d'), CELL = 18, cols = 0, rows = 0, dpr = 1;
+  var heat = new Float32Array(0), live = new Set(), running = false;
+  var colors = ['0,163,255', '56,232,214', '168,219,247', '18,56,230'];
+  function hue(i) { return colors[(i * 2654435761 >>> 0) % colors.length]; }
+  function size() {
+    var r = hero.getBoundingClientRect();
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    CELL = r.width < 640 ? 14 : 18;
+    cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr);
+    cols = Math.ceil(r.width / CELL); rows = Math.ceil(r.height / CELL);
+    heat = new Float32Array(cols * rows); live.clear();
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  function poke(x, y, radius, power) {
+    var cx = Math.floor(x / CELL), cy = Math.floor(y / CELL);
+    for (var dy = -radius; dy <= radius; dy++) for (var dx = -radius; dx <= radius; dx++) {
+      var gx = cx + dx, gy = cy + dy;
+      if (gx < 0 || gy < 0 || gx >= cols || gy >= rows) continue;
+      var d = Math.sqrt(dx * dx + dy * dy); if (d > radius + .3) continue;
+      var v = power * (1 - d / (radius + 1)) * (0.6 + Math.random() * 0.4), i = gy * cols + gx;
+      if (v > heat[i]) { heat[i] = v; live.add(i); }
+    }
+    if (!running) { running = true; requestAnimationFrame(tick); }
+  }
+  function tick() {
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    live.forEach(function (i) {
+      var v = heat[i] *= 0.93;
+      if (v < 0.02) { heat[i] = 0; live.delete(i); return; }
+      ctx.fillStyle = 'rgba(' + hue(i) + ',' + (v * 0.5).toFixed(3) + ')';
+      ctx.fillRect((i % cols) * CELL + 1, Math.floor(i / cols) * CELL + 1, CELL - 2, CELL - 2);
+    });
+    if (live.size) requestAnimationFrame(tick); else running = false;
+  }
+  var cloud = hero.querySelector('.plate .cloud');
+  hero.addEventListener('pointermove', function (e) {
+    var r = hero.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+    poke(x, y, e.pointerType === 'touch' ? 2 : 3, 1);
+    if (cloud) cloud.style.transform = 'translate(' + ((x / r.width - .5) * 18).toFixed(1) + 'px,' + ((y / r.height - .5) * 14).toFixed(1) + 'px)';
+  }, { passive: true });
+  hero.addEventListener('pointerleave', function () { if (cloud) cloud.style.transform = ''; });
+  setInterval(function () {
+    if (document.hidden || !cols) return;
+    poke(Math.random() * cols * CELL, Math.random() * rows * CELL, 0, 0.55);
+  }, 700);
+  size();
+  var t; window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(size, 150); });
+})();
 </script>
 
 </body>
