@@ -150,6 +150,20 @@ p{margin:0}
 .case-foot b{font-weight:400; color:var(--aqua)}
 @media (max-width:980px){ .cases{grid-template-columns:repeat(2, minmax(0,1fr))} .case:first-child{grid-column:1/-1} }
 @media (max-width:640px){ .cases{grid-template-columns:minmax(0,1fr)} }
+.cases.one{grid-template-columns:minmax(0,1fr)}
+.case.feature{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.case.feature .case-vis{margin:16px; aspect-ratio:1/1}
+.feature-body{display:flex; flex-direction:column; border-left:1px solid var(--line)}
+.case.feature .big{font-size:clamp(48px, 6.5vw, 88px)}
+.case.feature .case-top{padding:32px 32px 24px}
+.case.feature .case-body{padding:24px 32px 32px; gap:12px}
+.case.feature .case-body p{font-size:17px; max-width:44ch}
+.case.feature .case-foot{padding:16px 32px; margin-top:auto}
+.stat-row{display:flex; flex-wrap:wrap; gap:16px 40px; margin-top:12px; padding-top:20px; border-top:1px solid var(--line)}
+.stat-row b{display:block; font-family:var(--display); font-weight:800; font-size:26px; letter-spacing:-.03em; font-variant-numeric:tabular-nums}
+.stat-row span{font-family:var(--pixel); font-size:11px; letter-spacing:.12em; color:var(--muted)}
+@media (max-width:860px){ .case.feature{grid-template-columns:minmax(0,1fr)} .feature-body{border-left:0; border-top:1px solid var(--line)} }
+
 
 /* feed check */
 .offer{position:relative; overflow:hidden; background:var(--sky-grad)}
@@ -314,38 +328,21 @@ footer .wrap{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:24px 40
     <div class="wrap">
       <div class="sec-head">
         <div><span class="label">Work</span><h2>Here's the proof.</h2></div>
-        <p class="note">Real numbers from client accounts. More case studies on the way.</p>
+        <p class="note">Real numbers from a client account. More case studies on the way.</p>
       </div>
-      <div class="cases">
-        <article class="case">
-          <div class="case-top"><span class="big">28,366</span><span class="sub">VIEWS IN JULY</span></div>
-          <div class="case-vis"><img src="shakir-grid.jpg" alt="Nine architectural photographs from Shakir Jamaldeen's Instagram feed" width="1080" height="1080" loading="lazy"></div>
-          <div class="case-body">
-            <h3>Shakir Jamaldeen</h3>
-            <span class="who">ARCHITECTURE &amp; HOSPITALITY PHOTOGRAPHER</span>
-            <p>We made his feed an architecture-only gallery with a calm voice. 3,319 accounts reached in July.</p>
+      <div class="cases one">
+        <article class="case feature">
+          <div class="case-vis"><img src="shakir-grid.jpg" alt="Nine architectural photographs from Shakir Jamaldeen's Instagram feed" width="1400" height="1400" loading="lazy"></div>
+          <div class="feature-body">
+            <div class="case-top"><span class="big">28,366</span><span class="sub">VIEWS IN JULY</span></div>
+            <div class="case-body">
+              <h3>Shakir Jamaldeen</h3>
+              <span class="who">ARCHITECTURE &amp; HOSPITALITY PHOTOGRAPHER</span>
+              <p>We made his feed an architecture-only gallery with a calm voice. We plan it, write it and report on it every month.</p>
+              <div class="stat-row"><div><b>3,319</b><span>ACCOUNTS REACHED IN JULY</span></div><div><b>Monthly</b><span>ONGOING CLIENT</span></div></div>
+            </div>
+            <div class="case-foot"><span>STRATEGY · CALENDARS · CAPTIONS · REPORTS</span><b>01</b></div>
           </div>
-          <div class="case-foot"><span>STRATEGY · CAPTIONS · REPORTS</span><b>01</b></div>
-        </article>
-        <article class="case">
-          <div class="case-top"><span class="big soft">In progress</span><span class="sub">RESULTS COMING SOON</span></div>
-          <div class="case-vis grad"><img class="px cloud" src="data:image/png;base64,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" alt=""></div>
-          <div class="case-body">
-            <h3>Elion Holidays</h3>
-            <span class="who">TOUR OPERATOR · OVERSEAS TRAVELLERS</span>
-            <p>We make their feed and stories look as trustworthy as their trips.</p>
-          </div>
-          <div class="case-foot"><span>POSTS · STORIES · DESIGN</span><b>02</b></div>
-        </article>
-        <article class="case">
-          <div class="case-top"><span class="big soft">Open spot</span><span class="sub">2 CAFÉ SPOTS THIS MONTH</span></div>
-          <div class="case-vis grad"><img class="px cloud" src="data:image/png;base64,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" alt=""></div>
-          <div class="case-body">
-            <h3>Your café could be here</h3>
-            <span class="who">COLOMBO CAFÉS</span>
-            <p>Brunch shoots, reels and a feed that brings people in.</p>
-          </div>
-          <div class="case-foot"><span>SHOOTS · REELS · POSTS</span><b>03</b></div>
         </article>
       </div>
     </div>
