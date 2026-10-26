@@ -212,6 +212,24 @@ input[aria-invalid="true"]{border-color:#FF7A90}
 .sign em{font-style:normal; font-family:var(--pixel); font-size:11px; letter-spacing:.12em; color:var(--muted); border:1px solid var(--line); padding:4px 10px}
 @media (max-width:860px){ .founder{grid-template-columns:minmax(0,1fr)} .portrait{max-width:340px; aspect-ratio:4/5} }
 
+/* founders */
+.founders{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:24px}
+.fcard{border:1px solid var(--line); background:var(--panel); display:flex; flex-direction:column; min-width:0}
+.fcard .plate{margin:16px; border-color:var(--line)}
+.fimg{aspect-ratio:5/4; overflow:hidden; background:var(--midnight)}
+.fimg img{width:100%; height:100%; object-fit:cover; object-position:center 25%}
+.fimg.grad{background:var(--sky-grad); display:flex; align-items:center; justify-content:center}
+.fimg.grad .cloud{width:32%; height:auto}
+.fbody{padding:4px 24px 28px; display:flex; flex-direction:column; gap:10px}
+.fbody h3{font-size:clamp(20px, 2.2vw, 26px); font-weight:800; letter-spacing:-.025em}
+.fbody .role{font-family:var(--pixel); font-size:11px; letter-spacing:.12em; color:var(--aqua)}
+.fbody p{color:var(--muted); font-size:16px; max-width:46ch}
+.creds{list-style:none; margin:6px 0 0; padding:14px 0 0; border-top:1px solid var(--line); display:flex; flex-direction:column; gap:8px; font-size:15px}
+.creds li{display:grid; grid-template-columns:16px minmax(0,1fr); gap:8px}
+.creds li::before{content:"+"; font-family:var(--pixel); color:var(--aqua)}
+.fcard.soon .fbody p{font-family:var(--pixel); font-size:12px; letter-spacing:.12em; text-transform:uppercase}
+@media (max-width:760px){ .founders{grid-template-columns:minmax(0,1fr)} }
+
 /* plans */
 .plans{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:20px; align-items:stretch}
 .plan{border:1px solid var(--line); background:var(--panel); padding:26px; display:flex; flex-direction:column; gap:16px; min-width:0}
@@ -394,16 +412,39 @@ footer .wrap{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:24px 40
   </section>
 
   <section class="band" id="about">
-    <div class="wrap founder">
-      <div class="portrait cross"><img class="px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAGbCAYAAABeRE3xAAAMGElEQVR4nO3bMXbbxhqGYSDH1bC+e5DrLIOLEOtb35oFF5EaWgSXkVraQ2pMixT3SMex5ciiMBzi0/NUsi0Pf4ND4BWQDAMAANHG3gMA21VKWXrPwDpqra4HEOy33gMA2yT2sng/IZvgAwAIJ/gAAMIJPgCAcIIPACCc4AMACCf4AADCCT4AgHCCDwAgnOADAAgn+AAAwgk+AIBwgg8AIJzgAwAIJ/gAAMIJPgCAcIIPACCc4AMACCf4AADCCT4AgHCCDwAgnOAD3m16nJfeM7A+7yvkGnsPALRTSlmGYRjqaR7Kcffy+/U0v3+tD/59bt+37/GveN4H5bj7YY/98L21ut5ARz6AEOw5+FoQfXneG3zvJfqgH490AQDCCT4AgHCCDwAgnOADAAgn+AAAwgk+AIBwgg8AIJzgAwAIJ/gAAMIJPgCAcIIPACCc4AMACCf4AADCCT4AgHCCDwAgnOADAAgn+AAAwgk+AIBwgg8AIJzgAwAIJ/gAAMIJPgg1Pc5Lq7XraW61NMGmx3lpuS+Bnxt7DwCfWSml6cVPmHFLynHXZN1aq2sZvMEdPgA2rfUPTpBA8AEAhBN8AADhBB8AQDjBBwAQTvABAIQTfAAA4QQfAEA4wQcAEE7wAQCEE3wAAOEEHwBAOMEHABBO8AEAhBN8AADhBB8AQDjBBwAQTvABAIQTfAAA4QQfAEA4wQcAEE7wQSfT47z0ngFS+DzBvxt7DwC3rpTS7EJST3OrpTdv2tfeI9ykw7n0HuEmleOu6fq1VtdLNs0dPgCAcIIPACCc4AMACCf4AADCCT4AgHCCDwAgnOADAAgn+AAAwgk+AIBwgg8AIJzgAwAIJ/gAAMIJPgCAcIIPACCc4AMACCf4AADCCT4AgHCCDwAgnOADAAgn+AAAwgk+AIBwgg8AINyX3gNwW0opy1pr1VrHtdYahnVnYx3TvvYe4Sbd35Um6z481WbH/HBuM3OKlueftc+V8BqbjBeC6vrqae49wsXE3utaxd6zh6d2x33L0VeOu94jXEzwcQ0e6QIAhBN8AADhBB8AQDjBBwAQTvABAIQTfAzD4P/QBYBkgg8AIJzgAwAIJ/gAAMIJPgCAcIIPACCc4AMACCf4AADCCT4AgHCCDwAgnOADAAgn+AAAwgk+AIBwgg8AIJzgA1jRw1PtPQLADwQfAEC4sfcAXMf0OC8/+7PDuQzluGs+Qz3NzV9jba2PyxaPyTAMw7R3FyvV4Vw+vMa0r6usc4nvP7NvfcbKcTfU03yVc+DP1Fpdi2nOJtuQUspPo+3WbTVshqFt9LU+LsIsz/1du5Bq/Ti6VwSuoel5QPBxBR7pAgCEE3wAAOEEHwBAOMEHABBO8AEAhBN8AADhBB8AQDjBBwAQTvABAIQTfAAA4QQfAEA4wQcAEE7wAQCEE3wAAOEEHwBAOMEHABBO8AEAhBN8AADhBB8AQDjBBwAQTvABAIQTfAAA4b70HiBVKWXpPcN71NPce4Sb5dhwSx6eau8RWNnWrhfXUGsde8+Qxh2+Bnx4AeByrqPrE3wAAOEEHwBAOMEHABBO8AEAhBN8AADhBB8AQDjBBwAQTvABAIQTfAAA4QQfAEA4wQcAEE7wAQCEE3wAAOEEHwBAOMEHABBO8AEAhBN8AADhBB8AQDjBBwAQTvABAIQTfAAA4cbeAyQqpSwt1q2nucWyVzHta+8Rbs7hXHqP8CHeU95r63ueH5XjrvcIF6m1frr+cYcPOhFMAH20ujFzywQfAEA4wQcAEE7wAQCEE3wAAOEEHwBAOMEHABBO8AEAhBN8AADhBB8AQDjBBwAQTvABAIQTfAAA4QQfAEA4wQcAEE7wAQCEE3wAAOEEHwBAOMG3slLK0nsGAIBvCT4AgHCCDwAgnOADAAj3pfcASfz3e7zXtK/D4Vx6j3GRlnNP+9psbWA99TS/fF2Ou46TvN/0OC+Hr7ux9xzXEvEP/Syh9e0Ha21bvsDe37UNpoen7R6bllqH6pb3JK/zQ0IfW/2h8tYCsta66Wba/CPdzxJ7AACX2nzwAQDw7wQfAEA4wQcAEE7wAQCEE3wAAOEEHwBAOMEHABBO8AEAhBN8AADhBB8AQDjBBwAQTvABAIQTfAAA4QQfAEA4wQcAEE7wAQCEE3wAAOEEHwBAOMEHABBO8AEAhNt08E2P89J7BgAg39abY7zGi5RSNnuQ6mnuPcJVTPvadP37u9Js7YentrPDZ3E4t/ucDkP780xLLc9hrbU8R7beM+9RjrveI1ys1tq8xzZ9hw8AgLcJPgCAcIIPACCc4AMACCf4AADCCT4AgHCCDwAgnOADAAgn+AAAwgk+AIBwgg8AIJzgAwAIJ/gAAMIJPgCAcIIPACCc4AMACCf4AADCCT4AgHCCDwAgnOADAAgn+AAAwgk+AIBw4/MXpZSl5yCXqqe59wj/MO1r7xEA4MX9XWm29sNTm2ve4dxu5kuV4673CBepp3kY/jeOvw3DdmMPAMjj5sl6nkPVI10AgHCCDwAgnOADAAgn+AAAwgk+AIBwgg8AIJzgAwAIJ/gAAMIJPgCAcIIPACCc4AMACCf4AADCCT4AgHCCDwAgnOADAAgn+AAAwgk+AIBwgg8AIJzgAwAIJ/gAAMIJPgCAcF96DwAAtPPwVIf7u/LyNZ/TOAzDUEpZWr5IPc0tl29q2vtwAMCtO5xL7xEuVo67puvXWkePdAEAwgk+AIBwgg8AIJzgAwAIJ/gAAMIJPgCAcIIPACCc4AMACCf4AADCCT4AgHCCDwAgnOADAAgn+AAAwgk+AIBwgg8AIJzgAwAIJ/gAAMIJPgCAcIIPACCc4AMACCf4AADCCT4AgHCCDwAgnOADAAgn+AAAwgk+AIBwgg8AIJzgAwAIJ/gAAMIJPgCAcIIPACCc4AMACCf4AADCCT4AgHBfeg8An9nhXJquP+1r0/UB2AZ3+AAAwgk+AIBwgg8AIJzgAwAIJ/gAAMIJPgCAcIIPACCc4AMACCf4AADCCT4AgHCCDwAgnOADAAgn+AAAwgk+AIBwgg8AIJzgAwAIJ/gAAMIJPgCAcIIPACCc4AMACCf4AADCCT4AgHDjMAxDKWXpPcil6mnuPcLVTPvaewRWdjiX3iNczH7sw57hlmx5P75XOe56j3CxWuvoDh8AQDjBBwAQTvABAIQTfAAA4QQfAEA4wQcAEE7wAQCEE3wAAOEEHwBAOMEHABBO8AEAhBN8AADhBB8AQDjBBwAQTvABAIQTfAAA4QQfAEA4wQcAEE7wAQCEE3wAAOEEHwBAOMEHABBu/PYX0+O8tHiR//7+nxbLvqinuen6sKZpX1++PpxLx0ng+qZ9te/ZnHLcNV2/nuZ/XBvWdPi6G4fhu+BrpZTSJCSvQUzS0jVOIvCr7Ee2rPX+banW2rzHPNIFAAgn+AAAwgk+AIBwgg8AIJzgAwAIJ/gAAMIJPgCAcIIPACCc4AMACCf4AADCCT4AgHCCDwAgnOADAAgn+AAAwgk+AIBwgg8AIJzgAwAIJ/gAAMIJPgCAcIIPACCc4AMACCf4AADCjb0H+KhSytJ7hmupp7n3CKysHHe9R7iY/diHPcMt2fJ+fK8//vxrOHzdbbab3OEDAHjDlmNvGAQfAEA8wQcAEE7wAQCEE3wAAOEEHwBAOMEHABBO8AEAhBN8AADhBB8AQDjBBwAQTvABAIQTfAAA4QQfAEA4wQcAEE7wAQCEE3wAAOEEHwBAOMEHABBO8AEAhBN8AADhBB8AQLix9wBrmB7npdXah3MZpn394ffenOm7v/PauuW4+9BsbFs9zW/uk595bV9e6lf38/ffZ//2UU/zL33fGvvj+T1/7f2/5DWd9xiGj537ejl83W2+lzb/D9iyUkqzUGUb5vn/F+9xHDf1WVyWZdntXLh7+OPPv4b7u2LPsEnzPG9u76bwSBc62+LJb4szJ9ni8d/izKzPPuhH8EFHTn68V8KjJeD6BB8AQDjBBwAQTvABAIQTfAAA4QQfAEA4wQcAEE7wAQCEE3wAAOEEHwBAOMEHABBO8AEAhBN8AADhBB8AQDjBBwAQTvABAIQTfAAA4QQfAEA4wQcAEE7wAQCEE3wd1dPcewQ6qrWOvWf4iK3PD1yXax4AADT0NxYinCHccezeAAAAAElFTkSuQmCC" alt=""><span>SKYPIXEL · COLOMBO</span></div>
-      <div class="founder-copy">
-        <span class="label">About</span>
-        <h2>You talk to the person who shoots your content.</h2>
-        <div class="quote">
-          <p>I started SkyPixel after watching great hotels lose guests to places with better photos.</p>
-          <p><strong>We stay small, so you message the person behind the camera.</strong> No account managers. No chasing.</p>
-        </div>
-        <div class="sign"><span>FOUNDER, SKYPIXEL</span><em>COLOMBO · ON SITE ISLAND-WIDE</em></div>
+    <div class="wrap">
+      <div class="sec-head">
+        <div><span class="label">About</span><h2>You talk to the people who shoot your content.</h2></div>
+        <p class="note">Two founders in Colombo. No account managers, no chasing.</p>
+      </div>
+      <div class="founders">
+        <article class="fcard">
+          <figure class="plate cross">
+            <figcaption class="plate-cap"><b>FOUNDER 01</b><span>COLOMBO</span></figcaption>
+            <div class="fimg"><img src="devike.jpg" alt="Portrait of Devike Senarath, co-founder of SkyPixel" width="480" height="480" loading="lazy"></div>
+          </figure>
+          <div class="fbody">
+            <h3>Devike Senarath</h3>
+            <span class="role">CO-FOUNDER · CREATIVE DIRECTION, CONTENT &amp; WEB</span>
+            <p>Devike ran marketing for Diwan Restaurant &amp; Apartments and founded Leona Properties, a villa rental company on Airbnb and Booking.com. The Booking.com problem isn't theory here.</p>
+            <ul class="creds">
+              <li>Founder, Leona Properties</li>
+              <li>Ex-Head of Marketing, Diwan Restaurant</li>
+              <li>3D visualization &amp; interior design, AMDT</li>
+            </ul>
+          </div>
+        </article>
+        <article class="fcard soon">
+          <figure class="plate cross">
+            <figcaption class="plate-cap"><b>FOUNDER 02</b><span>COLOMBO</span></figcaption>
+            <div class="fimg grad"><img class="px cloud" src="data:image/png;base64,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" alt=""></div>
+          </figure>
+          <div class="fbody">
+            <h3>Thinuk</h3>
+            <span class="role">CO-FOUNDER</span>
+            <p>Profile coming soon.</p>
+          </div>
+        </article>
       </div>
     </div>
   </section>
